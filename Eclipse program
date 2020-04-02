@@ -1,0 +1,71 @@
+package testcases;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.remote.DesiredCapabilities;
+
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.remote.AndroidMobileCapabilityType;
+import io.appium.java_client.remote.MobileCapabilityType;
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
+
+/**
+ * Unit test for simple App.
+ */
+public class HelloWorld {
+	public static void main (String[] args) throws MalformedURLException, InterruptedException {
+		DesiredCapabilities cap = new DesiredCapabilities();
+		cap.setCapability(MobileCapabilityType.AUTOMATION_NAME, "Appium");
+		cap.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
+		//cap.setCapability(MobileCapabilityType.PLATFORM_VERSION, "7.1.1");
+		cap.setCapability(MobileCapabilityType.DEVICE_NAME, "emulator-5554");
+		cap.setCapability(AndroidMobileCapabilityType.APP_PACKAGE, "io.selendroid.testapp");
+		cap.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY, "io.selendroid.testapp.HomeScreenActivity");
+		
+		AndroidDriver<MobileElement> driver = new AndroidDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"),cap);
+		//Thread.sleep(8000);
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		driver.findElement(By.id("io.selendroid.testapp:id/my_text_field")).sendKeys("Hello Appium");
+		Thread.sleep(3000);
+		
+		/* 
+		driver.findElement(By.id("io.selendroid.testapp:id/startUserRegistration")).click();
+		driver.findElement(By.id("io.selendroid.testapp:id/inputUsername")).click();
+		driver.findElement(By.id("io.selendroid.testapp:id/inputUsername")).sendKeys("Jakub");
+		driver.findElement(By.id("io.selendroid.testapp:id/inputEmail")).click();
+		driver.findElement(By.id("io.selendroid.testapp:id/inputEmail")).sendKeys("email@poczta.pl");
+		driver.findElement(By.id("io.selendroid.testapp:id/inputPassword")).click();
+		driver.findElement(By.id("io.selendroid.testapp:id/inputPassword")).sendKeys("1234");
+		driver.findElement(By.id("io.selendroid.testapp:id/input_preferedProgrammingLanguage")).click();
+		Thread.sleep(500);
+		driver.findElement(By.linkText("Java")).click();
+		Thread.sleep(500);
+		driver.findElement(By.id("io.selendroid.testapp:id/input_adds")).click();
+		driver.findElement(By.id("io.selendroid.testapp:id/btnRegisterUser")).click();
+		Thread.sleep(2000);
+		driver.findElement(By.id("io.selendroid.testapp:id/buttonRegisterUser")).click();
+		*/
+		
+		/*
+		 
+		 driver.findElement(By.id("io.selendroid.testapp:id/visibleButtonTest")).click();
+		 String tekst = driver.findElement(By.id("io.selendroid.testapp:id/visibleTextView")).getText();
+		 System.out.println(tekst);
+		 Thread.sleep(1000);
+		 driver.findElement(By.id("io.selendroid.testapp:id/showPopupWindowButton")).click();
+		 Alert alert = driver.switchTo().alert();
+		 String text= driver.switchTo().alert().getText();
+	 	 System.out.println(text);
+ 		 alert.accept();
+		*/
+		
+		driver.quit();
+	}
+}
