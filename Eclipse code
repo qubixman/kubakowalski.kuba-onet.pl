@@ -1,11 +1,14 @@
 package testcases;
 
+
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import io.appium.java_client.MobileElement;
@@ -29,13 +32,14 @@ public class HelloWorld {
 		cap.setCapability(AndroidMobileCapabilityType.APP_PACKAGE, "io.selendroid.testapp");
 		cap.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY, "io.selendroid.testapp.HomeScreenActivity");
 		
-		AndroidDriver<MobileElement> driver = new AndroidDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"),cap);
-		//Thread.sleep(8000);
+		AndroidDriver<MobileElement> driver = new AndroidDriver<MobileElement>(new URL("http://localhost:4723/wd/hub"),cap);
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		driver.findElement(By.id("io.selendroid.testapp:id/my_text_field")).sendKeys("Hello Appium");
-		Thread.sleep(3000);
 		
-		/* 
+		//1
+		driver.findElement(By.id("io.selendroid.testapp:id/my_text_field")).sendKeys("Hello Appium");
+		Thread.sleep(1000);
+		
+		//2
 		driver.findElement(By.id("io.selendroid.testapp:id/startUserRegistration")).click();
 		driver.findElement(By.id("io.selendroid.testapp:id/inputUsername")).click();
 		driver.findElement(By.id("io.selendroid.testapp:id/inputUsername")).sendKeys("Jakub");
@@ -43,29 +47,26 @@ public class HelloWorld {
 		driver.findElement(By.id("io.selendroid.testapp:id/inputEmail")).sendKeys("email@poczta.pl");
 		driver.findElement(By.id("io.selendroid.testapp:id/inputPassword")).click();
 		driver.findElement(By.id("io.selendroid.testapp:id/inputPassword")).sendKeys("1234");
+		driver.navigate().back();
 		driver.findElement(By.id("io.selendroid.testapp:id/input_preferedProgrammingLanguage")).click();
 		Thread.sleep(500);
-		driver.findElement(By.linkText("Java")).click();
+		driver.findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout[2]/android.widget.ListView/android.widget.CheckedTextView[6]")).click();
 		Thread.sleep(500);
 		driver.findElement(By.id("io.selendroid.testapp:id/input_adds")).click();
 		driver.findElement(By.id("io.selendroid.testapp:id/btnRegisterUser")).click();
 		Thread.sleep(2000);
 		driver.findElement(By.id("io.selendroid.testapp:id/buttonRegisterUser")).click();
-		*/
 		
-		/*
-		 
-		 driver.findElement(By.id("io.selendroid.testapp:id/visibleButtonTest")).click();
-		 String tekst = driver.findElement(By.id("io.selendroid.testapp:id/visibleTextView")).getText();
-		 System.out.println(tekst);
-		 Thread.sleep(1000);
-		 driver.findElement(By.id("io.selendroid.testapp:id/showPopupWindowButton")).click();
-		 Alert alert = driver.switchTo().alert();
-		 String text= driver.switchTo().alert().getText();
-	 	 System.out.println(text);
- 		 alert.accept();
-		*/
-		
+		//3
+		driver.findElement(By.id("io.selendroid.testapp:id/visibleButtonTest")).click();
+		String tekst = driver.findElement(By.id("io.selendroid.testapp:id/visibleTextView")).getText();
+		System.out.println(tekst);
+		Thread.sleep(1000);
+		driver.findElement(By.id("io.selendroid.testapp:id/showPopupWindowButton")).click();
+		Alert alert = driver.switchTo().alert();
+		String text= driver.switchTo().alert().getText();
+	 	System.out.println(text);
+ 		alert.accept();	
 		driver.quit();
 	}
 }
